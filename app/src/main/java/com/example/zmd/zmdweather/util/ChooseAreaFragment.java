@@ -1,5 +1,6 @@
 package com.example.zmd.zmdweather.util;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zmd.zmdweather.R;
+import com.example.zmd.zmdweather.WeatherActivity;
 import com.example.zmd.zmdweather.db.City;
 import com.example.zmd.zmdweather.db.County;
 import com.example.zmd.zmdweather.db.Province;
@@ -81,6 +83,12 @@ public class ChooseAreaFragment extends Fragment {
                 }else if(currentLevel == LEVEL_CITY){
                     selectedCity = cityList.get(position);
                     queryCounties();
+                }else if(currentLevel ==LEVEL_COUNTY){
+                    String weatherId = countyList.get(position).getWeatherId();
+                    Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                    intent.putExtra("weather_id",weatherId);
+                    startActivity(intent);
+                    getActivity().finish();
                 }
             }
         });
